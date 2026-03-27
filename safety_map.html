@@ -1,0 +1,2411 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a5a8dcf8973f93adc88cff6ef982432b {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+        <div style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+                    z-index: 1000; background-color: rgba(0,0,0,0.7); 
+                    padding: 10px 20px; border-radius: 8px; color: white;">
+            <h3 style="margin:0; font-family: Arial;">
+                🔴 Women's Safety Index — India 2022
+            </h3>
+            <p style="margin:0; font-size:12px; color:#ccc;">
+                Top 100 highest-risk districts | Source: NCRB via India Data Portal
+            </p>
+        </div>
+    
+    
+            <div class="folium-map" id="map_a5a8dcf8973f93adc88cff6ef982432b" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_a5a8dcf8973f93adc88cff6ef982432b = L.map(
+                "map_a5a8dcf8973f93adc88cff6ef982432b",
+                {
+                    center: [20.5937, 78.9629],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_19a6485a65634426bf766d5550203801 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_19a6485a65634426bf766d5550203801.addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+            var heat_map_646b08178bebb25b2ac3845f2308441d = L.heatLayer(
+                [[18.5213738, 73.8545071, 1.0], [28.4646148, 77.0299194, 1.0], [26.4410107, 80.2652803, 1.0], [25.470994, 74.6961316, 1.0], [26.2037247, 78.1573628, 1.0], [23.1701522, 79.9324505, 1.0], [25.0057449, 88.1398483, 1.0], [24.1745993, 88.2721335, 1.0], [22.0648451, 87.8377586, 1.0], [22.1776733, 88.5307853, 1.0], [25.9061389, 76.4815499, 1.0], [23.3884089, 87.9606763, 1.0], [23.8083076, 78.758254, 1.0], [26.1482548, 85.3316097, 1.0], [28.5856255, 77.0704986, 1.0], [26.9873443, 73.7389011, 1.0], [19.1627725, 74.8580243, 1.0], [19.3653598, 73.3685437, 1.0], [19.054999, 72.8692035, 1.0], [18.5213738, 73.8545071, 1.0], [19.3653598, 73.3685437, 1.0], [18.5213738, 73.8545071, 1.0], [26.8381, 80.9346001, 1.0], [29.0018557, 77.7679671, 1.0], [28.7749966, 77.4586967, 1.0], [28.4947158, 80.1076122, 1.0], [25.75, 81.75, 1.0], [27.1941954, 78.4604956, 1.0], [19.6090068, 84.7080633, 1.0], [28.4582345, 79.4047452, 1.0], [27.5026748, 80.8335139, 1.0], [25.4381302, 81.8338005, 1.0], [27.8761073, 78.1358153, 1.0], [22.7203616, 75.8681996, 1.0], [27.1752554, 78.0098161, 1.0], [23.2584857, 77.401989, 1.0], [12.9461555, 77.5503844, 1.0], [17.4281967, 79.090491, 1.0], [22.6926815, 88.6625795, 1.0], [21.9156338, 86.3961824, 1.0], [17.360589, 78.4740613, 1.0], [26.4691, 74.639, 1.0], [17.360589, 78.4740613, 1.0], [27.4140049, 76.6170387, 1.0], [24.578721, 73.6862571, 1.0], [16.8169118, 80.2502299, 1.0], [27.0246959, 77.2920116, 1.0], [22.5786572, 75.2258637, 0.9944], [25.4552211, 73.419389, 0.9926999999999999], [28.5897393, 77.2250102, 0.9883], [20.0112475, 73.7902364, 0.9826999999999999], [22.5726459, 88.3638953, 0.9804999999999999], [29.3659533, 74.298429, 0.9788], [28.6138954, 77.2090057, 0.9765999999999999], [21.1498134, 79.0820556, 0.9637], [16.2915189, 80.4541588, 0.9531000000000001], [20.5475164, 86.5296168, 0.9515], [27.6624156, 75.0279971, 0.9375], [28.116667, 80.716667, 0.9201999999999999], [25.5814853, 71.1924922, 0.9196], [28.5897393, 77.2250102, 0.9179999999999999], [24.6954445, 80.7770348, 0.9179999999999999], [22.6926815, 88.6625795, 0.9118], [25.7491703, 85.3972164, 0.9113], [28.706005, 77.2596444, 0.9096], [25.1737019, 75.8574194, 0.9051], [28.4031478, 77.3105561, 0.904], [24.3132368, 76.5221078, 0.9001], [23.0215374, 72.5800568, 0.8979], [24.7964355, 85.0079563, 0.8906000000000001], [25.6093239, 85.1235252, 0.8884000000000001], [24.7171578, 74.4718129, 0.8387], [27.9472329, 76.6676441, 0.8382], [28.0159286, 73.3171367, 0.8376], [24.7560846, 81.3810574, 0.8348], [29.9123514, 78.0087178, 0.8343], [28.7192546, 77.0652677, 0.8326], [26.2604732, 82.2380532, 0.8315], [26.9154576, 75.8189817, 0.8198000000000001], [28.7192546, 77.0652677, 0.8142], [16.2135466, 81.0277844, 0.8131], [24.0232221, 74.6250275, 0.8051999999999999], [21.2380912, 81.6336993, 0.7951999999999999], [27.4955539, 77.6855554, 0.7935], [20.8428827, 75.5261246, 0.7929999999999999], [23.8538893, 73.7087177, 0.7824], [17.9820644, 79.5970954, 0.7807], [19.0592671, 72.861326, 0.7801], [23.4915047, 74.3502172, 0.7785], [20.8411255, 85.0804007, 0.7701], [22.1638486, 82.1365923, 0.7662], [29.3912753, 76.9771675, 0.7656000000000001], [17.6935526, 83.2921297, 0.7628], [26.25, 81.25, 0.7556], [26.9986675, 79.6927946, 0.755], [20.0638677, 78.3565663, 0.75], [28.5936077, 77.0664075, 0.7444], [26.9154576, 75.8189817, 0.7411], [17.8499067, 75.2763203, 0.7404999999999999]],
+                {
+  "minOpacity": 0.4,
+  "maxZoom": 18,
+  "radius": 25,
+  "blur": 15,
+  "gradient": {
+  0.2: "blue",
+  0.5: "yellow",
+  0.8: "orange",
+  1.0: "red",
+},
+}
+            );
+        
+    
+            heat_map_646b08178bebb25b2ac3845f2308441d.addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+            var circle_marker_ba500df83e4e3d5102382e108d3005cb = L.circleMarker(
+                [18.5213738, 73.8545071],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_3d847a56ba949103571b4c8c5fd0eab1 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_bfb4fa24da56cbb1a34d7445ab51cb58 = $(`<div id="html_bfb4fa24da56cbb1a34d7445ab51cb58" style="width: 100.0%; height: 100.0%;">                 <b>Pune, Maharashtra</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1753</b><br>                 Year: 2022                 </div>`)[0];
+                popup_3d847a56ba949103571b4c8c5fd0eab1.setContent(html_bfb4fa24da56cbb1a34d7445ab51cb58);
+            
+        
+
+        circle_marker_ba500df83e4e3d5102382e108d3005cb.bindPopup(popup_3d847a56ba949103571b4c8c5fd0eab1)
+        ;
+
+        
+    
+    
+            var circle_marker_d5d22d37a701ef46bd1b3c0d61c299b7 = L.circleMarker(
+                [28.4646148, 77.0299194],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_262d0c067288818cb9dbb71cb27aed95 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_04416ea8d35328c144a599c045b7e154 = $(`<div id="html_04416ea8d35328c144a599c045b7e154" style="width: 100.0%; height: 100.0%;">                 <b>Gurugram, Haryana</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1161</b><br>                 Year: 2022                 </div>`)[0];
+                popup_262d0c067288818cb9dbb71cb27aed95.setContent(html_04416ea8d35328c144a599c045b7e154);
+            
+        
+
+        circle_marker_d5d22d37a701ef46bd1b3c0d61c299b7.bindPopup(popup_262d0c067288818cb9dbb71cb27aed95)
+        ;
+
+        
+    
+    
+            var circle_marker_8017a8a5ed48b86c11427c218717a2b3 = L.circleMarker(
+                [26.4410107, 80.2652803],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_63849c5cef8faa61b88156203937ae34 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_36d1faa6e7c8bc9ace10cab9f34f5a59 = $(`<div id="html_36d1faa6e7c8bc9ace10cab9f34f5a59" style="width: 100.0%; height: 100.0%;">                 <b>Kanpur Nagar, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1978</b><br>                 Year: 2022                 </div>`)[0];
+                popup_63849c5cef8faa61b88156203937ae34.setContent(html_36d1faa6e7c8bc9ace10cab9f34f5a59);
+            
+        
+
+        circle_marker_8017a8a5ed48b86c11427c218717a2b3.bindPopup(popup_63849c5cef8faa61b88156203937ae34)
+        ;
+
+        
+    
+    
+            var circle_marker_a6be4d03b466bf0194d918589c68bdb1 = L.circleMarker(
+                [25.470994, 74.6961316],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_7e34a502ef86b0230665246793f3f397 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_8cc6cabb8fe09bd34487feb6e17f9b08 = $(`<div id="html_8cc6cabb8fe09bd34487feb6e17f9b08" style="width: 100.0%; height: 100.0%;">                 <b>Bhilwara, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>2094</b><br>                 Year: 2022                 </div>`)[0];
+                popup_7e34a502ef86b0230665246793f3f397.setContent(html_8cc6cabb8fe09bd34487feb6e17f9b08);
+            
+        
+
+        circle_marker_a6be4d03b466bf0194d918589c68bdb1.bindPopup(popup_7e34a502ef86b0230665246793f3f397)
+        ;
+
+        
+    
+    
+            var circle_marker_514c6961648e117ef099db3b526bad43 = L.circleMarker(
+                [26.2037247, 78.1573628],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_3025345726fcae2f9991f0d17dc67ae7 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_5de2b9ef82713592bd4cb6f6f68aa6c3 = $(`<div id="html_5de2b9ef82713592bd4cb6f6f68aa6c3" style="width: 100.0%; height: 100.0%;">                 <b>Gwalior, Madhya Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1416</b><br>                 Year: 2022                 </div>`)[0];
+                popup_3025345726fcae2f9991f0d17dc67ae7.setContent(html_5de2b9ef82713592bd4cb6f6f68aa6c3);
+            
+        
+
+        circle_marker_514c6961648e117ef099db3b526bad43.bindPopup(popup_3025345726fcae2f9991f0d17dc67ae7)
+        ;
+
+        
+    
+    
+            var circle_marker_0243de7e4d17a6e20b112c1a30d680b3 = L.circleMarker(
+                [23.1701522, 79.9324505],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_1f83cfec6fb7520a2089e28e89ae4a1b = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_32d75203bb95d0398f9805282eed571e = $(`<div id="html_32d75203bb95d0398f9805282eed571e" style="width: 100.0%; height: 100.0%;">                 <b>Jabalpur, Madhya Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1512</b><br>                 Year: 2022                 </div>`)[0];
+                popup_1f83cfec6fb7520a2089e28e89ae4a1b.setContent(html_32d75203bb95d0398f9805282eed571e);
+            
+        
+
+        circle_marker_0243de7e4d17a6e20b112c1a30d680b3.bindPopup(popup_1f83cfec6fb7520a2089e28e89ae4a1b)
+        ;
+
+        
+    
+    
+            var circle_marker_992e9cd59fff4be0401c94458678d130 = L.circleMarker(
+                [25.0057449, 88.1398483],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_cf227aee3bc17dabeb36c396ed13706a = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_27cae7dc1ec9efd80c42b57da322c5a0 = $(`<div id="html_27cae7dc1ec9efd80c42b57da322c5a0" style="width: 100.0%; height: 100.0%;">                 <b>Malda, West Bengal</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1747</b><br>                 Year: 2022                 </div>`)[0];
+                popup_cf227aee3bc17dabeb36c396ed13706a.setContent(html_27cae7dc1ec9efd80c42b57da322c5a0);
+            
+        
+
+        circle_marker_992e9cd59fff4be0401c94458678d130.bindPopup(popup_cf227aee3bc17dabeb36c396ed13706a)
+        ;
+
+        
+    
+    
+            var circle_marker_773dba4b9b2104f1041473e3bccaa5c9 = L.circleMarker(
+                [24.1745993, 88.2721335],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_941d02b934030d3fa402b9c12fb6e846 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_1140290185771aacb3b93d6fae54b958 = $(`<div id="html_1140290185771aacb3b93d6fae54b958" style="width: 100.0%; height: 100.0%;">                 <b>Murshidabad, West Bengal</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>2307</b><br>                 Year: 2022                 </div>`)[0];
+                popup_941d02b934030d3fa402b9c12fb6e846.setContent(html_1140290185771aacb3b93d6fae54b958);
+            
+        
+
+        circle_marker_773dba4b9b2104f1041473e3bccaa5c9.bindPopup(popup_941d02b934030d3fa402b9c12fb6e846)
+        ;
+
+        
+    
+    
+            var circle_marker_5fa6fb227adaf062b734fa773486faf0 = L.circleMarker(
+                [22.0648451, 87.8377586],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_e3894db8c4e7b56d7b99159cf5c70b72 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_edbc51cfd6f3e5d62c3dd75ec6011e9f = $(`<div id="html_edbc51cfd6f3e5d62c3dd75ec6011e9f" style="width: 100.0%; height: 100.0%;">                 <b>Purba Medinipur, West Bengal</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1645</b><br>                 Year: 2022                 </div>`)[0];
+                popup_e3894db8c4e7b56d7b99159cf5c70b72.setContent(html_edbc51cfd6f3e5d62c3dd75ec6011e9f);
+            
+        
+
+        circle_marker_5fa6fb227adaf062b734fa773486faf0.bindPopup(popup_e3894db8c4e7b56d7b99159cf5c70b72)
+        ;
+
+        
+    
+    
+            var circle_marker_d45f3796aaf456f0931a4fa4c4088c86 = L.circleMarker(
+                [22.1776733, 88.5307853],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_fa3b44e847b950d67221535cb09a61f9 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_257a285dfb1b5c68798c952536c6ee52 = $(`<div id="html_257a285dfb1b5c68798c952536c6ee52" style="width: 100.0%; height: 100.0%;">                 <b>South 24 Parganas, West Bengal</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>2052</b><br>                 Year: 2022                 </div>`)[0];
+                popup_fa3b44e847b950d67221535cb09a61f9.setContent(html_257a285dfb1b5c68798c952536c6ee52);
+            
+        
+
+        circle_marker_d45f3796aaf456f0931a4fa4c4088c86.bindPopup(popup_fa3b44e847b950d67221535cb09a61f9)
+        ;
+
+        
+    
+    
+            var circle_marker_407b5d744a125c24edf822d72900024f = L.circleMarker(
+                [25.9061389, 76.4815499],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_a9f76e1d8cd855e55119966fa8d2bfc9 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_d678d58aa70db78342c3b9ec29a09cec = $(`<div id="html_d678d58aa70db78342c3b9ec29a09cec" style="width: 100.0%; height: 100.0%;">                 <b>Ganganagar, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1610</b><br>                 Year: 2022                 </div>`)[0];
+                popup_a9f76e1d8cd855e55119966fa8d2bfc9.setContent(html_d678d58aa70db78342c3b9ec29a09cec);
+            
+        
+
+        circle_marker_407b5d744a125c24edf822d72900024f.bindPopup(popup_a9f76e1d8cd855e55119966fa8d2bfc9)
+        ;
+
+        
+    
+    
+            var circle_marker_d646679f8a6a2d378ace5bb1442b37c3 = L.circleMarker(
+                [23.3884089, 87.9606763],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_ff0b09a2cca36ada95ea109ff69fb702 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c76b7ce17cf0a048f5bdf037458f7f33 = $(`<div id="html_c76b7ce17cf0a048f5bdf037458f7f33" style="width: 100.0%; height: 100.0%;">                 <b>Purba Bardhaman, West Bengal</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1737</b><br>                 Year: 2022                 </div>`)[0];
+                popup_ff0b09a2cca36ada95ea109ff69fb702.setContent(html_c76b7ce17cf0a048f5bdf037458f7f33);
+            
+        
+
+        circle_marker_d646679f8a6a2d378ace5bb1442b37c3.bindPopup(popup_ff0b09a2cca36ada95ea109ff69fb702)
+        ;
+
+        
+    
+    
+            var circle_marker_d2304726a1dc6707fc966a626242123e = L.circleMarker(
+                [23.8083076, 78.758254],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_2b0812461a0158fbd6f127bbe5f1d84d = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_02d59a77087004f2d9f55df779505d00 = $(`<div id="html_02d59a77087004f2d9f55df779505d00" style="width: 100.0%; height: 100.0%;">                 <b>Sagar, Madhya Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1285</b><br>                 Year: 2022                 </div>`)[0];
+                popup_2b0812461a0158fbd6f127bbe5f1d84d.setContent(html_02d59a77087004f2d9f55df779505d00);
+            
+        
+
+        circle_marker_d2304726a1dc6707fc966a626242123e.bindPopup(popup_2b0812461a0158fbd6f127bbe5f1d84d)
+        ;
+
+        
+    
+    
+            var circle_marker_19af72201e7b1ec61ab678091248cb6a = L.circleMarker(
+                [26.1482548, 85.3316097],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_09599e44c198e5c59f00165f701fff62 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_aae88f3234f59622e05959683823bfff = $(`<div id="html_aae88f3234f59622e05959683823bfff" style="width: 100.0%; height: 100.0%;">                 <b>Muzaffarpur, Bihar</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>914</b><br>                 Year: 2022                 </div>`)[0];
+                popup_09599e44c198e5c59f00165f701fff62.setContent(html_aae88f3234f59622e05959683823bfff);
+            
+        
+
+        circle_marker_19af72201e7b1ec61ab678091248cb6a.bindPopup(popup_09599e44c198e5c59f00165f701fff62)
+        ;
+
+        
+    
+    
+            var circle_marker_5d643a6d479a05acf72ddf06cf145685 = L.circleMarker(
+                [28.5856255, 77.0704986],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_b1fecf0c1af65196ad3d1539673eca47 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_762aed327a98131954bf2b5bae229f2a = $(`<div id="html_762aed327a98131954bf2b5bae229f2a" style="width: 100.0%; height: 100.0%;">                 <b>South West, Delhi</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1323</b><br>                 Year: 2022                 </div>`)[0];
+                popup_b1fecf0c1af65196ad3d1539673eca47.setContent(html_762aed327a98131954bf2b5bae229f2a);
+            
+        
+
+        circle_marker_5d643a6d479a05acf72ddf06cf145685.bindPopup(popup_b1fecf0c1af65196ad3d1539673eca47)
+        ;
+
+        
+    
+    
+            var circle_marker_39aac35edb2921b4fe6536c3160b3b14 = L.circleMarker(
+                [26.9873443, 73.7389011],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_8437572f6373b4ad0e0cffb6642861c3 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_0fe39792b7dfbd1fa96d7191480fbb5f = $(`<div id="html_0fe39792b7dfbd1fa96d7191480fbb5f" style="width: 100.0%; height: 100.0%;">                 <b>Nagaur, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1355</b><br>                 Year: 2022                 </div>`)[0];
+                popup_8437572f6373b4ad0e0cffb6642861c3.setContent(html_0fe39792b7dfbd1fa96d7191480fbb5f);
+            
+        
+
+        circle_marker_39aac35edb2921b4fe6536c3160b3b14.bindPopup(popup_8437572f6373b4ad0e0cffb6642861c3)
+        ;
+
+        
+    
+    
+            var circle_marker_c2f203b32a03da42c569ff2865ee84e9 = L.circleMarker(
+                [19.1627725, 74.8580243],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_696701771ecea5d46300a06d8c7700a2 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_10ae20ddf5ac7d27beeb2d1549ec21f8 = $(`<div id="html_10ae20ddf5ac7d27beeb2d1549ec21f8" style="width: 100.0%; height: 100.0%;">                 <b>Ahmednagar, Maharashtra</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>2047</b><br>                 Year: 2022                 </div>`)[0];
+                popup_696701771ecea5d46300a06d8c7700a2.setContent(html_10ae20ddf5ac7d27beeb2d1549ec21f8);
+            
+        
+
+        circle_marker_c2f203b32a03da42c569ff2865ee84e9.bindPopup(popup_696701771ecea5d46300a06d8c7700a2)
+        ;
+
+        
+    
+    
+            var circle_marker_b87488a802f8b07769c08cb7075e1251 = L.circleMarker(
+                [19.3653598, 73.3685437],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_0e2669bbbec8e60e63de708bc79216e0 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_08b0542d696e528a0c8496df1c373c40 = $(`<div id="html_08b0542d696e528a0c8496df1c373c40" style="width: 100.0%; height: 100.0%;">                 <b>Thane, Maharashtra</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1663</b><br>                 Year: 2022                 </div>`)[0];
+                popup_0e2669bbbec8e60e63de708bc79216e0.setContent(html_08b0542d696e528a0c8496df1c373c40);
+            
+        
+
+        circle_marker_b87488a802f8b07769c08cb7075e1251.bindPopup(popup_0e2669bbbec8e60e63de708bc79216e0)
+        ;
+
+        
+    
+    
+            var circle_marker_5b1f1dfd72a925dd8f2a6f2a7da41341 = L.circleMarker(
+                [19.054999, 72.8692035],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_6c9300a32b98af4079b18951bda38c3c = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_f7d6c8f37aa495cb2952798a95578cb0 = $(`<div id="html_f7d6c8f37aa495cb2952798a95578cb0" style="width: 100.0%; height: 100.0%;">                 <b>Mumbai, Maharashtra</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>5462</b><br>                 Year: 2022                 </div>`)[0];
+                popup_6c9300a32b98af4079b18951bda38c3c.setContent(html_f7d6c8f37aa495cb2952798a95578cb0);
+            
+        
+
+        circle_marker_5b1f1dfd72a925dd8f2a6f2a7da41341.bindPopup(popup_6c9300a32b98af4079b18951bda38c3c)
+        ;
+
+        
+    
+    
+            var circle_marker_c9ae823e8f7ffb5425c0c962ea7625b4 = L.circleMarker(
+                [18.5213738, 73.8545071],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_1b59a0976007db64854399b26c50af19 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_11b8974098e6bac2d9569ccd5f74d254 = $(`<div id="html_11b8974098e6bac2d9569ccd5f74d254" style="width: 100.0%; height: 100.0%;">                 <b>Pune, Maharashtra</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1446</b><br>                 Year: 2022                 </div>`)[0];
+                popup_1b59a0976007db64854399b26c50af19.setContent(html_11b8974098e6bac2d9569ccd5f74d254);
+            
+        
+
+        circle_marker_c9ae823e8f7ffb5425c0c962ea7625b4.bindPopup(popup_1b59a0976007db64854399b26c50af19)
+        ;
+
+        
+    
+    
+            var circle_marker_981d6ad1ec5db90f0f9d90dd8ca061d3 = L.circleMarker(
+                [19.3653598, 73.3685437],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_fde233e4ca5d394ddabcca94dcd6d573 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_64b4c3f54fada35a499dc5dc139b2609 = $(`<div id="html_64b4c3f54fada35a499dc5dc139b2609" style="width: 100.0%; height: 100.0%;">                 <b>Thane, Maharashtra</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>2243</b><br>                 Year: 2022                 </div>`)[0];
+                popup_fde233e4ca5d394ddabcca94dcd6d573.setContent(html_64b4c3f54fada35a499dc5dc139b2609);
+            
+        
+
+        circle_marker_981d6ad1ec5db90f0f9d90dd8ca061d3.bindPopup(popup_fde233e4ca5d394ddabcca94dcd6d573)
+        ;
+
+        
+    
+    
+            var circle_marker_b3cf42f565fa56f9adc9a85f56adeeb4 = L.circleMarker(
+                [18.5213738, 73.8545071],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_2b4ca4ac1264d8a3f580f900ed876a31 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_625b86850837b407ad7f351c7adb59f4 = $(`<div id="html_625b86850837b407ad7f351c7adb59f4" style="width: 100.0%; height: 100.0%;">                 <b>Pune, Maharashtra</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1989</b><br>                 Year: 2022                 </div>`)[0];
+                popup_2b4ca4ac1264d8a3f580f900ed876a31.setContent(html_625b86850837b407ad7f351c7adb59f4);
+            
+        
+
+        circle_marker_b3cf42f565fa56f9adc9a85f56adeeb4.bindPopup(popup_2b4ca4ac1264d8a3f580f900ed876a31)
+        ;
+
+        
+    
+    
+            var circle_marker_b0123e2f1edc8be5ebdb7da8650ec30a = L.circleMarker(
+                [26.8381, 80.9346001],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_f5165950705b6ecbf6689a77370f8199 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_fc0e752b067da17c29d7b0feaade18f3 = $(`<div id="html_fc0e752b067da17c29d7b0feaade18f3" style="width: 100.0%; height: 100.0%;">                 <b>Lucknow, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1943</b><br>                 Year: 2022                 </div>`)[0];
+                popup_f5165950705b6ecbf6689a77370f8199.setContent(html_fc0e752b067da17c29d7b0feaade18f3);
+            
+        
+
+        circle_marker_b0123e2f1edc8be5ebdb7da8650ec30a.bindPopup(popup_f5165950705b6ecbf6689a77370f8199)
+        ;
+
+        
+    
+    
+            var circle_marker_96b6a46b422c96156007d97f04ef54dc = L.circleMarker(
+                [29.0018557, 77.7679671],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_e56f07ba13d46398e3599cef97465d5a = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_83828a61ee541806c6916241a03d7dbd = $(`<div id="html_83828a61ee541806c6916241a03d7dbd" style="width: 100.0%; height: 100.0%;">                 <b>Meerut, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1400</b><br>                 Year: 2022                 </div>`)[0];
+                popup_e56f07ba13d46398e3599cef97465d5a.setContent(html_83828a61ee541806c6916241a03d7dbd);
+            
+        
+
+        circle_marker_96b6a46b422c96156007d97f04ef54dc.bindPopup(popup_e56f07ba13d46398e3599cef97465d5a)
+        ;
+
+        
+    
+    
+            var circle_marker_c711e786994c42d87019a19e7c5118e4 = L.circleMarker(
+                [28.7749966, 77.4586967],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_d8f0a106b5ea5ff82d3dd6895347bdcd = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_fb3dfcf11ed74df45fdcda5b0fc9c045 = $(`<div id="html_fb3dfcf11ed74df45fdcda5b0fc9c045" style="width: 100.0%; height: 100.0%;">                 <b>Ghaziabad, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1529</b><br>                 Year: 2022                 </div>`)[0];
+                popup_d8f0a106b5ea5ff82d3dd6895347bdcd.setContent(html_fb3dfcf11ed74df45fdcda5b0fc9c045);
+            
+        
+
+        circle_marker_c711e786994c42d87019a19e7c5118e4.bindPopup(popup_d8f0a106b5ea5ff82d3dd6895347bdcd)
+        ;
+
+        
+    
+    
+            var circle_marker_631c314aecc13c90bdbfa62edd643adc = L.circleMarker(
+                [28.4947158, 80.1076122],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_8a8c8c6dba3eb2015cbef03b9417f4b5 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_765c6be5564bf6bd319903ef9148330c = $(`<div id="html_765c6be5564bf6bd319903ef9148330c" style="width: 100.0%; height: 100.0%;">                 <b>Pilibhit, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1050</b><br>                 Year: 2022                 </div>`)[0];
+                popup_8a8c8c6dba3eb2015cbef03b9417f4b5.setContent(html_765c6be5564bf6bd319903ef9148330c);
+            
+        
+
+        circle_marker_631c314aecc13c90bdbfa62edd643adc.bindPopup(popup_8a8c8c6dba3eb2015cbef03b9417f4b5)
+        ;
+
+        
+    
+    
+            var circle_marker_c2e57ec1b9cc84c9474e5612f37ac388 = L.circleMarker(
+                [25.75, 81.75],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_de5c64d12097a046de6d846ea743533e = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_12c03ed25371b326cb7ee50acc5887ae = $(`<div id="html_12c03ed25371b326cb7ee50acc5887ae" style="width: 100.0%; height: 100.0%;">                 <b>Pratapgarh, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1141</b><br>                 Year: 2022                 </div>`)[0];
+                popup_de5c64d12097a046de6d846ea743533e.setContent(html_12c03ed25371b326cb7ee50acc5887ae);
+            
+        
+
+        circle_marker_c2e57ec1b9cc84c9474e5612f37ac388.bindPopup(popup_de5c64d12097a046de6d846ea743533e)
+        ;
+
+        
+    
+    
+            var circle_marker_ada6192f2ba41f3e424cde6e680b6000 = L.circleMarker(
+                [27.1941954, 78.4604956],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_d0d661ec1ee0929ef458bd98eea384e1 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_676083693c7723a386d95989c585ed67 = $(`<div id="html_676083693c7723a386d95989c585ed67" style="width: 100.0%; height: 100.0%;">                 <b>Firozabad, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1454</b><br>                 Year: 2022                 </div>`)[0];
+                popup_d0d661ec1ee0929ef458bd98eea384e1.setContent(html_676083693c7723a386d95989c585ed67);
+            
+        
+
+        circle_marker_ada6192f2ba41f3e424cde6e680b6000.bindPopup(popup_d0d661ec1ee0929ef458bd98eea384e1)
+        ;
+
+        
+    
+    
+            var circle_marker_9ef78d4b4eabcca9dba89e25e503ee0e = L.circleMarker(
+                [19.6090068, 84.7080633],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_b7bc6b81ec44613a8007c331bb4c2220 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_e982998b0689a1d446069e7eba978650 = $(`<div id="html_e982998b0689a1d446069e7eba978650" style="width: 100.0%; height: 100.0%;">                 <b>Ganjam, Odisha</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1433</b><br>                 Year: 2022                 </div>`)[0];
+                popup_b7bc6b81ec44613a8007c331bb4c2220.setContent(html_e982998b0689a1d446069e7eba978650);
+            
+        
+
+        circle_marker_9ef78d4b4eabcca9dba89e25e503ee0e.bindPopup(popup_b7bc6b81ec44613a8007c331bb4c2220)
+        ;
+
+        
+    
+    
+            var circle_marker_30775c7e42f49bcfcac3aa49a6fb0001 = L.circleMarker(
+                [28.4582345, 79.4047452],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_022d59ef9e4d1040bfbc65c6967d17ce = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_1425325b1ca395e121c1470e592d6658 = $(`<div id="html_1425325b1ca395e121c1470e592d6658" style="width: 100.0%; height: 100.0%;">                 <b>Bareilly, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>2044</b><br>                 Year: 2022                 </div>`)[0];
+                popup_022d59ef9e4d1040bfbc65c6967d17ce.setContent(html_1425325b1ca395e121c1470e592d6658);
+            
+        
+
+        circle_marker_30775c7e42f49bcfcac3aa49a6fb0001.bindPopup(popup_022d59ef9e4d1040bfbc65c6967d17ce)
+        ;
+
+        
+    
+    
+            var circle_marker_331a170e5bba4f07fe5740f96a6f5b08 = L.circleMarker(
+                [27.5026748, 80.8335139],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_97f6c07d1ea16e4ec49cdf5f3b0c9857 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_ec9b2bf5954a852fb0a3cad317d5f446 = $(`<div id="html_ec9b2bf5954a852fb0a3cad317d5f446" style="width: 100.0%; height: 100.0%;">                 <b>Sitapur, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>971</b><br>                 Year: 2022                 </div>`)[0];
+                popup_97f6c07d1ea16e4ec49cdf5f3b0c9857.setContent(html_ec9b2bf5954a852fb0a3cad317d5f446);
+            
+        
+
+        circle_marker_331a170e5bba4f07fe5740f96a6f5b08.bindPopup(popup_97f6c07d1ea16e4ec49cdf5f3b0c9857)
+        ;
+
+        
+    
+    
+            var circle_marker_71b22ffba7ead4a46df603fd19fcae55 = L.circleMarker(
+                [25.4381302, 81.8338005],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_617712af686a816834886c2b70ec1d03 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_7608439d4782ede586718fa670b8cb90 = $(`<div id="html_7608439d4782ede586718fa670b8cb90" style="width: 100.0%; height: 100.0%;">                 <b>Prayagraj, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1499</b><br>                 Year: 2022                 </div>`)[0];
+                popup_617712af686a816834886c2b70ec1d03.setContent(html_7608439d4782ede586718fa670b8cb90);
+            
+        
+
+        circle_marker_71b22ffba7ead4a46df603fd19fcae55.bindPopup(popup_617712af686a816834886c2b70ec1d03)
+        ;
+
+        
+    
+    
+            var circle_marker_b3f40449e4e6088e1c8f3b5e36212255 = L.circleMarker(
+                [27.8761073, 78.1358153],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_d454e06921defc7bcceabe881035ab8b = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_57435a14d22dad005a98b05883504576 = $(`<div id="html_57435a14d22dad005a98b05883504576" style="width: 100.0%; height: 100.0%;">                 <b>Aligarh, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>2216</b><br>                 Year: 2022                 </div>`)[0];
+                popup_d454e06921defc7bcceabe881035ab8b.setContent(html_57435a14d22dad005a98b05883504576);
+            
+        
+
+        circle_marker_b3f40449e4e6088e1c8f3b5e36212255.bindPopup(popup_d454e06921defc7bcceabe881035ab8b)
+        ;
+
+        
+    
+    
+            var circle_marker_d32285f320900a4bce1e94f82440db67 = L.circleMarker(
+                [22.7203616, 75.8681996],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_6fcf0d8c5172a93f9fa8831121291a22 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_49018b9034c31f828232cf0bb86a1f5d = $(`<div id="html_49018b9034c31f828232cf0bb86a1f5d" style="width: 100.0%; height: 100.0%;">                 <b>Indore, Madhya Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1732</b><br>                 Year: 2022                 </div>`)[0];
+                popup_6fcf0d8c5172a93f9fa8831121291a22.setContent(html_49018b9034c31f828232cf0bb86a1f5d);
+            
+        
+
+        circle_marker_d32285f320900a4bce1e94f82440db67.bindPopup(popup_6fcf0d8c5172a93f9fa8831121291a22)
+        ;
+
+        
+    
+    
+            var circle_marker_09f7119cc4aae48d24c6e77975003db9 = L.circleMarker(
+                [27.1752554, 78.0098161],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_cd324ec899bee9cfffd7e2de8223bca4 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c92421055c5396d418bb3695a25482e9 = $(`<div id="html_c92421055c5396d418bb3695a25482e9" style="width: 100.0%; height: 100.0%;">                 <b>Agra, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1598</b><br>                 Year: 2022                 </div>`)[0];
+                popup_cd324ec899bee9cfffd7e2de8223bca4.setContent(html_c92421055c5396d418bb3695a25482e9);
+            
+        
+
+        circle_marker_09f7119cc4aae48d24c6e77975003db9.bindPopup(popup_cd324ec899bee9cfffd7e2de8223bca4)
+        ;
+
+        
+    
+    
+            var circle_marker_5b9fb1ca90928f3a68fb5943b17bf710 = L.circleMarker(
+                [23.2584857, 77.401989],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_974e86f130538dda6f1f0326acc680d4 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_1d4589be1b69386ae2d2e6b86ee8319f = $(`<div id="html_1d4589be1b69386ae2d2e6b86ee8319f" style="width: 100.0%; height: 100.0%;">                 <b>Bhopal, Madhya Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1930</b><br>                 Year: 2022                 </div>`)[0];
+                popup_974e86f130538dda6f1f0326acc680d4.setContent(html_1d4589be1b69386ae2d2e6b86ee8319f);
+            
+        
+
+        circle_marker_5b9fb1ca90928f3a68fb5943b17bf710.bindPopup(popup_974e86f130538dda6f1f0326acc680d4)
+        ;
+
+        
+    
+    
+            var circle_marker_63f49ba87e9077dcee26a586ce4735c6 = L.circleMarker(
+                [12.9461555, 77.5503844],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_1d5c5fbc7fbd19dabe352fb1b9adb609 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_7a5fe0c9365957dd173c55c7066619e7 = $(`<div id="html_7a5fe0c9365957dd173c55c7066619e7" style="width: 100.0%; height: 100.0%;">                 <b>Bengaluru Urban, Karnataka</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>3563</b><br>                 Year: 2022                 </div>`)[0];
+                popup_1d5c5fbc7fbd19dabe352fb1b9adb609.setContent(html_7a5fe0c9365957dd173c55c7066619e7);
+            
+        
+
+        circle_marker_63f49ba87e9077dcee26a586ce4735c6.bindPopup(popup_1d5c5fbc7fbd19dabe352fb1b9adb609)
+        ;
+
+        
+    
+    
+            var circle_marker_0083b8f61dcbdf59b94bfbb338cfd129 = L.circleMarker(
+                [17.4281967, 79.090491],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_65544ed7c5478424f92a115abd97b48c = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a84031042ddbd8edd25360b3f5adb68f = $(`<div id="html_a84031042ddbd8edd25360b3f5adb68f" style="width: 100.0%; height: 100.0%;">                 <b>Yadadri Bhuvanagiri, Telangana</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>3415</b><br>                 Year: 2022                 </div>`)[0];
+                popup_65544ed7c5478424f92a115abd97b48c.setContent(html_a84031042ddbd8edd25360b3f5adb68f);
+            
+        
+
+        circle_marker_0083b8f61dcbdf59b94bfbb338cfd129.bindPopup(popup_65544ed7c5478424f92a115abd97b48c)
+        ;
+
+        
+    
+    
+            var circle_marker_e7515c1dab09e0617c0aa1ac1b7359ba = L.circleMarker(
+                [22.6926815, 88.6625795],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_ea1098cdb34e39e95c067f8cf70f64de = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_36936fbf870954aef3fb8dd3dd4a25d0 = $(`<div id="html_36936fbf870954aef3fb8dd3dd4a25d0" style="width: 100.0%; height: 100.0%;">                 <b>North 24 Parganas, West Bengal</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>2136</b><br>                 Year: 2022                 </div>`)[0];
+                popup_ea1098cdb34e39e95c067f8cf70f64de.setContent(html_36936fbf870954aef3fb8dd3dd4a25d0);
+            
+        
+
+        circle_marker_e7515c1dab09e0617c0aa1ac1b7359ba.bindPopup(popup_ea1098cdb34e39e95c067f8cf70f64de)
+        ;
+
+        
+    
+    
+            var circle_marker_7eb6c55354492ecd99c090a8f4216ea5 = L.circleMarker(
+                [21.9156338, 86.3961824],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_151e9ac70447deb5f0c47091af7a3ed3 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_f92b789374f05872726408133afef4cc = $(`<div id="html_f92b789374f05872726408133afef4cc" style="width: 100.0%; height: 100.0%;">                 <b>Mayurbhanj, Odisha</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1701</b><br>                 Year: 2022                 </div>`)[0];
+                popup_151e9ac70447deb5f0c47091af7a3ed3.setContent(html_f92b789374f05872726408133afef4cc);
+            
+        
+
+        circle_marker_7eb6c55354492ecd99c090a8f4216ea5.bindPopup(popup_151e9ac70447deb5f0c47091af7a3ed3)
+        ;
+
+        
+    
+    
+            var circle_marker_c8bb90fcb5332a242a70c79040e891aa = L.circleMarker(
+                [17.360589, 78.4740613],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_26e0b5e6b57430c2689f32dc97091a53 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_7026684d1533e078c98cd9cfdecbb495 = $(`<div id="html_7026684d1533e078c98cd9cfdecbb495" style="width: 100.0%; height: 100.0%;">                 <b>Hyderabad, Telangana</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>2868</b><br>                 Year: 2022                 </div>`)[0];
+                popup_26e0b5e6b57430c2689f32dc97091a53.setContent(html_7026684d1533e078c98cd9cfdecbb495);
+            
+        
+
+        circle_marker_c8bb90fcb5332a242a70c79040e891aa.bindPopup(popup_26e0b5e6b57430c2689f32dc97091a53)
+        ;
+
+        
+    
+    
+            var circle_marker_cc4323c2476547947d9ac4e8b53c40e2 = L.circleMarker(
+                [26.4691, 74.639],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_e40e78fe98833c75dd8f3c611ec10f7b = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_e2bc1ebcc7e44a4864ee7d569a22095d = $(`<div id="html_e2bc1ebcc7e44a4864ee7d569a22095d" style="width: 100.0%; height: 100.0%;">                 <b>Ajmer, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>2275</b><br>                 Year: 2022                 </div>`)[0];
+                popup_e40e78fe98833c75dd8f3c611ec10f7b.setContent(html_e2bc1ebcc7e44a4864ee7d569a22095d);
+            
+        
+
+        circle_marker_cc4323c2476547947d9ac4e8b53c40e2.bindPopup(popup_e40e78fe98833c75dd8f3c611ec10f7b)
+        ;
+
+        
+    
+    
+            var circle_marker_6bd07c08011295ca059ea32652e66762 = L.circleMarker(
+                [17.360589, 78.4740613],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_debe0621a59a4711d47d521eca8537a3 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_f460c7f8daa31abbb42fb1d954c9ae2c = $(`<div id="html_f460c7f8daa31abbb42fb1d954c9ae2c" style="width: 100.0%; height: 100.0%;">                 <b>Hyderabad, Telangana</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>2776</b><br>                 Year: 2022                 </div>`)[0];
+                popup_debe0621a59a4711d47d521eca8537a3.setContent(html_f460c7f8daa31abbb42fb1d954c9ae2c);
+            
+        
+
+        circle_marker_6bd07c08011295ca059ea32652e66762.bindPopup(popup_debe0621a59a4711d47d521eca8537a3)
+        ;
+
+        
+    
+    
+            var circle_marker_b9363c69c987dd559dfd9581ac0efbea = L.circleMarker(
+                [27.4140049, 76.6170387],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_ef1da7fba9e8973d3df2f7ccabb56baa = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_1cb705760be3b571c87708012489e5ac = $(`<div id="html_1cb705760be3b571c87708012489e5ac" style="width: 100.0%; height: 100.0%;">                 <b>Alwar, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1660</b><br>                 Year: 2022                 </div>`)[0];
+                popup_ef1da7fba9e8973d3df2f7ccabb56baa.setContent(html_1cb705760be3b571c87708012489e5ac);
+            
+        
+
+        circle_marker_b9363c69c987dd559dfd9581ac0efbea.bindPopup(popup_ef1da7fba9e8973d3df2f7ccabb56baa)
+        ;
+
+        
+    
+    
+            var circle_marker_e474410976ac3ef33f7f0e35e1f49295 = L.circleMarker(
+                [24.578721, 73.6862571],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_b023ec29ce3641ad64f3ac9fc37c0b35 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_19d3ebae68d9427827e779dae4d2625b = $(`<div id="html_19d3ebae68d9427827e779dae4d2625b" style="width: 100.0%; height: 100.0%;">                 <b>Udaipur, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>2125</b><br>                 Year: 2022                 </div>`)[0];
+                popup_b023ec29ce3641ad64f3ac9fc37c0b35.setContent(html_19d3ebae68d9427827e779dae4d2625b);
+            
+        
+
+        circle_marker_e474410976ac3ef33f7f0e35e1f49295.bindPopup(popup_b023ec29ce3641ad64f3ac9fc37c0b35)
+        ;
+
+        
+    
+    
+            var circle_marker_59d702371beae1d9fb8626af254dc24d = L.circleMarker(
+                [16.8169118, 80.2502299],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_82ab79f0571ed72caebc32c4de2fb42a = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_26cda6d7c1dfb80f7eab2359e874b9c8 = $(`<div id="html_26cda6d7c1dfb80f7eab2359e874b9c8" style="width: 100.0%; height: 100.0%;">                 <b>Ntr, Andhra Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>2127</b><br>                 Year: 2022                 </div>`)[0];
+                popup_82ab79f0571ed72caebc32c4de2fb42a.setContent(html_26cda6d7c1dfb80f7eab2359e874b9c8);
+            
+        
+
+        circle_marker_59d702371beae1d9fb8626af254dc24d.bindPopup(popup_82ab79f0571ed72caebc32c4de2fb42a)
+        ;
+
+        
+    
+    
+            var circle_marker_29dd92f283ccf40501a9d9c28a99d7d9 = L.circleMarker(
+                [27.0246959, 77.2920116],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_58f98a032de558ef41e97ee9fd77cac4 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_227e2c6d548ed7a78bf4ae897e3c91f6 = $(`<div id="html_227e2c6d548ed7a78bf4ae897e3c91f6" style="width: 100.0%; height: 100.0%;">                 <b>Bharatpur, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>100.0/100</b><br>                 Total Crimes: <b>1726</b><br>                 Year: 2022                 </div>`)[0];
+                popup_58f98a032de558ef41e97ee9fd77cac4.setContent(html_227e2c6d548ed7a78bf4ae897e3c91f6);
+            
+        
+
+        circle_marker_29dd92f283ccf40501a9d9c28a99d7d9.bindPopup(popup_58f98a032de558ef41e97ee9fd77cac4)
+        ;
+
+        
+    
+    
+            var circle_marker_d445d710db26d8bfc0af5b0cfba121e4 = L.circleMarker(
+                [22.5786572, 75.2258637],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_81e25890014ce7ed8d49cf7bc870ccb1 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_371357ee97ab350fa91fa30bbe84fc6b = $(`<div id="html_371357ee97ab350fa91fa30bbe84fc6b" style="width: 100.0%; height: 100.0%;">                 <b>Dhar, Madhya Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>99.4/100</b><br>                 Total Crimes: <b>1146</b><br>                 Year: 2022                 </div>`)[0];
+                popup_81e25890014ce7ed8d49cf7bc870ccb1.setContent(html_371357ee97ab350fa91fa30bbe84fc6b);
+            
+        
+
+        circle_marker_d445d710db26d8bfc0af5b0cfba121e4.bindPopup(popup_81e25890014ce7ed8d49cf7bc870ccb1)
+        ;
+
+        
+    
+    
+            var circle_marker_7f68059f5d6aa659e4e2b156d7b86949 = L.circleMarker(
+                [25.4552211, 73.419389],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_0d5c12dbeab4c059c87b4f441b78b362 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_4600ef4f9db0012333b5a25d93cb7719 = $(`<div id="html_4600ef4f9db0012333b5a25d93cb7719" style="width: 100.0%; height: 100.0%;">                 <b>Pali, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>99.3/100</b><br>                 Total Crimes: <b>1321</b><br>                 Year: 2022                 </div>`)[0];
+                popup_0d5c12dbeab4c059c87b4f441b78b362.setContent(html_4600ef4f9db0012333b5a25d93cb7719);
+            
+        
+
+        circle_marker_7f68059f5d6aa659e4e2b156d7b86949.bindPopup(popup_0d5c12dbeab4c059c87b4f441b78b362)
+        ;
+
+        
+    
+    
+            var circle_marker_e53520f0b03af4cb3a874004718fb630 = L.circleMarker(
+                [28.5897393, 77.2250102],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_5f0fc435cc7162ab4eb36508d7c021f3 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_e491d7b76a3a2880b1b66d2305ce05b9 = $(`<div id="html_e491d7b76a3a2880b1b66d2305ce05b9" style="width: 100.0%; height: 100.0%;">                 <b>South East, Delhi</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>98.8/100</b><br>                 Total Crimes: <b>1180</b><br>                 Year: 2022                 </div>`)[0];
+                popup_5f0fc435cc7162ab4eb36508d7c021f3.setContent(html_e491d7b76a3a2880b1b66d2305ce05b9);
+            
+        
+
+        circle_marker_e53520f0b03af4cb3a874004718fb630.bindPopup(popup_5f0fc435cc7162ab4eb36508d7c021f3)
+        ;
+
+        
+    
+    
+            var circle_marker_7032977e6dc8a9b1466a972b791b607c = L.circleMarker(
+                [20.0112475, 73.7902364],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_f947b57017acb23520fca30fbe458314 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_f7d70f700099e8a42f5da24aa27f7dd9 = $(`<div id="html_f7d70f700099e8a42f5da24aa27f7dd9" style="width: 100.0%; height: 100.0%;">                 <b>Nashik, Maharashtra</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>98.3/100</b><br>                 Total Crimes: <b>1440</b><br>                 Year: 2022                 </div>`)[0];
+                popup_f947b57017acb23520fca30fbe458314.setContent(html_f7d70f700099e8a42f5da24aa27f7dd9);
+            
+        
+
+        circle_marker_7032977e6dc8a9b1466a972b791b607c.bindPopup(popup_f947b57017acb23520fca30fbe458314)
+        ;
+
+        
+    
+    
+            var circle_marker_a89506041cdaadb89e30f5cb0c5aa91c = L.circleMarker(
+                [22.5726459, 88.3638953],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_2f6fc1d6823546a7c7e299596027e5e4 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_94bee8e27b6d3a8813a9ed94bad363b6 = $(`<div id="html_94bee8e27b6d3a8813a9ed94bad363b6" style="width: 100.0%; height: 100.0%;">                 <b>Kolkata, West Bengal</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>98.0/100</b><br>                 Total Crimes: <b>1591</b><br>                 Year: 2022                 </div>`)[0];
+                popup_2f6fc1d6823546a7c7e299596027e5e4.setContent(html_94bee8e27b6d3a8813a9ed94bad363b6);
+            
+        
+
+        circle_marker_a89506041cdaadb89e30f5cb0c5aa91c.bindPopup(popup_2f6fc1d6823546a7c7e299596027e5e4)
+        ;
+
+        
+    
+    
+            var circle_marker_36329c58aaaa739120c0437ad367c99f = L.circleMarker(
+                [29.3659533, 74.298429],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_589f96db15efd1b4ac780534534828a5 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_173d8cda5f3dcc88e26d578feffdaaa0 = $(`<div id="html_173d8cda5f3dcc88e26d578feffdaaa0" style="width: 100.0%; height: 100.0%;">                 <b>Hanumangarh, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>97.9/100</b><br>                 Total Crimes: <b>1344</b><br>                 Year: 2022                 </div>`)[0];
+                popup_589f96db15efd1b4ac780534534828a5.setContent(html_173d8cda5f3dcc88e26d578feffdaaa0);
+            
+        
+
+        circle_marker_36329c58aaaa739120c0437ad367c99f.bindPopup(popup_589f96db15efd1b4ac780534534828a5)
+        ;
+
+        
+    
+    
+            var circle_marker_6b1547741e02e1bf694aebc6ca42140d = L.circleMarker(
+                [28.6138954, 77.2090057],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_99d32a4e71e5ef23cb3f502fc996c5b0 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_750e1919e04902e66dc690dfe4b372b2 = $(`<div id="html_750e1919e04902e66dc690dfe4b372b2" style="width: 100.0%; height: 100.0%;">                 <b>New Delhi, Delhi</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>97.7/100</b><br>                 Total Crimes: <b>1128</b><br>                 Year: 2022                 </div>`)[0];
+                popup_99d32a4e71e5ef23cb3f502fc996c5b0.setContent(html_750e1919e04902e66dc690dfe4b372b2);
+            
+        
+
+        circle_marker_6b1547741e02e1bf694aebc6ca42140d.bindPopup(popup_99d32a4e71e5ef23cb3f502fc996c5b0)
+        ;
+
+        
+    
+    
+            var circle_marker_831fcbf6cc1ed5eb988037435259d2ab = L.circleMarker(
+                [21.1498134, 79.0820556],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_923b902da4192005c36b69fccab61c96 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_aad3e59a1ae121cebe23e9fb82563e12 = $(`<div id="html_aad3e59a1ae121cebe23e9fb82563e12" style="width: 100.0%; height: 100.0%;">                 <b>Nagpur, Maharashtra</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>96.4/100</b><br>                 Total Crimes: <b>1210</b><br>                 Year: 2022                 </div>`)[0];
+                popup_923b902da4192005c36b69fccab61c96.setContent(html_aad3e59a1ae121cebe23e9fb82563e12);
+            
+        
+
+        circle_marker_831fcbf6cc1ed5eb988037435259d2ab.bindPopup(popup_923b902da4192005c36b69fccab61c96)
+        ;
+
+        
+    
+    
+            var circle_marker_5961dc2c49aea79eef0e7c1b5292f790 = L.circleMarker(
+                [16.2915189, 80.4541588],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_8b0fd63752ec140f58dd28e3335ce1bf = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c7f7ea51c174c3ca4677270d745f3095 = $(`<div id="html_c7f7ea51c174c3ca4677270d745f3095" style="width: 100.0%; height: 100.0%;">                 <b>Guntur, Andhra Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>95.3/100</b><br>                 Total Crimes: <b>1676</b><br>                 Year: 2022                 </div>`)[0];
+                popup_8b0fd63752ec140f58dd28e3335ce1bf.setContent(html_c7f7ea51c174c3ca4677270d745f3095);
+            
+        
+
+        circle_marker_5961dc2c49aea79eef0e7c1b5292f790.bindPopup(popup_8b0fd63752ec140f58dd28e3335ce1bf)
+        ;
+
+        
+    
+    
+            var circle_marker_2bb0787ca0dad9d27e9747dbf74e6be0 = L.circleMarker(
+                [20.5475164, 86.5296168],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_c7370fecc4d316a298db1d50750ca6c9 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_6c622085a3852222d350bc11769b3856 = $(`<div id="html_6c622085a3852222d350bc11769b3856" style="width: 100.0%; height: 100.0%;">                 <b>Kendrapara, Odisha</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>95.2/100</b><br>                 Total Crimes: <b>1414</b><br>                 Year: 2022                 </div>`)[0];
+                popup_c7370fecc4d316a298db1d50750ca6c9.setContent(html_6c622085a3852222d350bc11769b3856);
+            
+        
+
+        circle_marker_2bb0787ca0dad9d27e9747dbf74e6be0.bindPopup(popup_c7370fecc4d316a298db1d50750ca6c9)
+        ;
+
+        
+    
+    
+            var circle_marker_b7e67be7c75c956ccc5541c6a637aed1 = L.circleMarker(
+                [27.6624156, 75.0279971],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_3c69f3b43cf1d73db79f3ce17ce05999 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_4e29a2a6a4b5d93311799c9caf26467c = $(`<div id="html_4e29a2a6a4b5d93311799c9caf26467c" style="width: 100.0%; height: 100.0%;">                 <b>Sikar, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>93.8/100</b><br>                 Total Crimes: <b>1288</b><br>                 Year: 2022                 </div>`)[0];
+                popup_3c69f3b43cf1d73db79f3ce17ce05999.setContent(html_4e29a2a6a4b5d93311799c9caf26467c);
+            
+        
+
+        circle_marker_b7e67be7c75c956ccc5541c6a637aed1.bindPopup(popup_3c69f3b43cf1d73db79f3ce17ce05999)
+        ;
+
+        
+    
+    
+            var circle_marker_d5ec1685c1bdde160a546e6614d83a5b = L.circleMarker(
+                [28.116667, 80.716667],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_dbb0144bf909db6c54f99ce8ff751448 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_817639454b1f730e5a98ce2905463b26 = $(`<div id="html_817639454b1f730e5a98ce2905463b26" style="width: 100.0%; height: 100.0%;">                 <b>Kheri, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>92.0/100</b><br>                 Total Crimes: <b>801</b><br>                 Year: 2022                 </div>`)[0];
+                popup_dbb0144bf909db6c54f99ce8ff751448.setContent(html_817639454b1f730e5a98ce2905463b26);
+            
+        
+
+        circle_marker_d5ec1685c1bdde160a546e6614d83a5b.bindPopup(popup_dbb0144bf909db6c54f99ce8ff751448)
+        ;
+
+        
+    
+    
+            var circle_marker_79d6061c088f2465f7fd34c2bdd76a3b = L.circleMarker(
+                [25.5814853, 71.1924922],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_2454eb6635fc11e4e46b94bdd970ce81 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_6be3d462d2b8e656096fe9e40505e3fe = $(`<div id="html_6be3d462d2b8e656096fe9e40505e3fe" style="width: 100.0%; height: 100.0%;">                 <b>Barmer, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>92.0/100</b><br>                 Total Crimes: <b>1052</b><br>                 Year: 2022                 </div>`)[0];
+                popup_2454eb6635fc11e4e46b94bdd970ce81.setContent(html_6be3d462d2b8e656096fe9e40505e3fe);
+            
+        
+
+        circle_marker_79d6061c088f2465f7fd34c2bdd76a3b.bindPopup(popup_2454eb6635fc11e4e46b94bdd970ce81)
+        ;
+
+        
+    
+    
+            var circle_marker_007b8194052de8d8fab998670b58ee8c = L.circleMarker(
+                [28.5897393, 77.2250102],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_28631cc4d1408167b8a929ec942221a0 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a383c4499b56ead3ed1c27f73278e75f = $(`<div id="html_a383c4499b56ead3ed1c27f73278e75f" style="width: 100.0%; height: 100.0%;">                 <b>South, Delhi</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>91.8/100</b><br>                 Total Crimes: <b>1208</b><br>                 Year: 2022                 </div>`)[0];
+                popup_28631cc4d1408167b8a929ec942221a0.setContent(html_a383c4499b56ead3ed1c27f73278e75f);
+            
+        
+
+        circle_marker_007b8194052de8d8fab998670b58ee8c.bindPopup(popup_28631cc4d1408167b8a929ec942221a0)
+        ;
+
+        
+    
+    
+            var circle_marker_f4c754a45dfa0456010e7cd7986e5e3a = L.circleMarker(
+                [24.6954445, 80.7770348],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_041eeeb79e32b869d2a9ecc70fe1ae39 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a1f4ef4ac3ea95069fa2c848e958ab84 = $(`<div id="html_a1f4ef4ac3ea95069fa2c848e958ab84" style="width: 100.0%; height: 100.0%;">                 <b>Satna, Madhya Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>91.8/100</b><br>                 Total Crimes: <b>647</b><br>                 Year: 2022                 </div>`)[0];
+                popup_041eeeb79e32b869d2a9ecc70fe1ae39.setContent(html_a1f4ef4ac3ea95069fa2c848e958ab84);
+            
+        
+
+        circle_marker_f4c754a45dfa0456010e7cd7986e5e3a.bindPopup(popup_041eeeb79e32b869d2a9ecc70fe1ae39)
+        ;
+
+        
+    
+    
+            var circle_marker_827c832d2ae9f69a5409bcce68770db2 = L.circleMarker(
+                [22.6926815, 88.6625795],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_3787c78c0ad523a1d46f23a4d03f387a = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_d54e4fbda7e93ea406c16d026ac9c764 = $(`<div id="html_d54e4fbda7e93ea406c16d026ac9c764" style="width: 100.0%; height: 100.0%;">                 <b>North 24 Parganas, West Bengal</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>91.2/100</b><br>                 Total Crimes: <b>1149</b><br>                 Year: 2022                 </div>`)[0];
+                popup_3787c78c0ad523a1d46f23a4d03f387a.setContent(html_d54e4fbda7e93ea406c16d026ac9c764);
+            
+        
+
+        circle_marker_827c832d2ae9f69a5409bcce68770db2.bindPopup(popup_3787c78c0ad523a1d46f23a4d03f387a)
+        ;
+
+        
+    
+    
+            var circle_marker_191fd23a5df9c5fd0dd1118b3caa40ae = L.circleMarker(
+                [25.7491703, 85.3972164],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_eed00a8d4fc9810035f3bc4d93b73e7a = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_9c3dd4cc25460b65ce05142c219e904a = $(`<div id="html_9c3dd4cc25460b65ce05142c219e904a" style="width: 100.0%; height: 100.0%;">                 <b>Vaishali, Bihar</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>91.1/100</b><br>                 Total Crimes: <b>652</b><br>                 Year: 2022                 </div>`)[0];
+                popup_eed00a8d4fc9810035f3bc4d93b73e7a.setContent(html_9c3dd4cc25460b65ce05142c219e904a);
+            
+        
+
+        circle_marker_191fd23a5df9c5fd0dd1118b3caa40ae.bindPopup(popup_eed00a8d4fc9810035f3bc4d93b73e7a)
+        ;
+
+        
+    
+    
+            var circle_marker_34fee09750bafc19608ff122291f94e9 = L.circleMarker(
+                [28.706005, 77.2596444],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_f19d6e45bc1ea4dbe7d5eb5cfefae290 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_d622c533ba7d21832b08e8cf2669da35 = $(`<div id="html_d622c533ba7d21832b08e8cf2669da35" style="width: 100.0%; height: 100.0%;">                 <b>North East, Delhi</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>91.0/100</b><br>                 Total Crimes: <b>1126</b><br>                 Year: 2022                 </div>`)[0];
+                popup_f19d6e45bc1ea4dbe7d5eb5cfefae290.setContent(html_d622c533ba7d21832b08e8cf2669da35);
+            
+        
+
+        circle_marker_34fee09750bafc19608ff122291f94e9.bindPopup(popup_f19d6e45bc1ea4dbe7d5eb5cfefae290)
+        ;
+
+        
+    
+    
+            var circle_marker_c8ecdf5e3d995fa267aa0a47e52980c2 = L.circleMarker(
+                [25.1737019, 75.8574194],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_52c5fda189caed7b6d84240094d0caa5 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_86923eff3b85f3d6f8f7711103096632 = $(`<div id="html_86923eff3b85f3d6f8f7711103096632" style="width: 100.0%; height: 100.0%;">                 <b>Kota, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>90.5/100</b><br>                 Total Crimes: <b>1066</b><br>                 Year: 2022                 </div>`)[0];
+                popup_52c5fda189caed7b6d84240094d0caa5.setContent(html_86923eff3b85f3d6f8f7711103096632);
+            
+        
+
+        circle_marker_c8ecdf5e3d995fa267aa0a47e52980c2.bindPopup(popup_52c5fda189caed7b6d84240094d0caa5)
+        ;
+
+        
+    
+    
+            var circle_marker_0cc6ca0170a9da9e7a0421c9dfcc655c = L.circleMarker(
+                [28.4031478, 77.3105561],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_d9ba2a7adf4a370cb357781f7d3f88a7 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_435ad4959b636cf355920493ceaff435 = $(`<div id="html_435ad4959b636cf355920493ceaff435" style="width: 100.0%; height: 100.0%;">                 <b>Faridabad, Haryana</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>90.4/100</b><br>                 Total Crimes: <b>1089</b><br>                 Year: 2022                 </div>`)[0];
+                popup_d9ba2a7adf4a370cb357781f7d3f88a7.setContent(html_435ad4959b636cf355920493ceaff435);
+            
+        
+
+        circle_marker_0cc6ca0170a9da9e7a0421c9dfcc655c.bindPopup(popup_d9ba2a7adf4a370cb357781f7d3f88a7)
+        ;
+
+        
+    
+    
+            var circle_marker_2fdf43f4d4cf655048e48372c51b3629 = L.circleMarker(
+                [24.3132368, 76.5221078],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_084f444f90deb8dc34b2d1a3695de03e = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_055718afb9318a08a9365a765bde796d = $(`<div id="html_055718afb9318a08a9365a765bde796d" style="width: 100.0%; height: 100.0%;">                 <b>Jhalawar, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>90.0/100</b><br>                 Total Crimes: <b>1185</b><br>                 Year: 2022                 </div>`)[0];
+                popup_084f444f90deb8dc34b2d1a3695de03e.setContent(html_055718afb9318a08a9365a765bde796d);
+            
+        
+
+        circle_marker_2fdf43f4d4cf655048e48372c51b3629.bindPopup(popup_084f444f90deb8dc34b2d1a3695de03e)
+        ;
+
+        
+    
+    
+            var circle_marker_d6d7db8b56c701f39855d50762ffbc8f = L.circleMarker(
+                [23.0215374, 72.5800568],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_7464d46a996ea1d14d0aa9adf2d88e14 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_e651608a70151ede21354d266d0da27b = $(`<div id="html_e651608a70151ede21354d266d0da27b" style="width: 100.0%; height: 100.0%;">                 <b>Ahmadabad, Gujarat</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>89.8/100</b><br>                 Total Crimes: <b>1374</b><br>                 Year: 2022                 </div>`)[0];
+                popup_7464d46a996ea1d14d0aa9adf2d88e14.setContent(html_e651608a70151ede21354d266d0da27b);
+            
+        
+
+        circle_marker_d6d7db8b56c701f39855d50762ffbc8f.bindPopup(popup_7464d46a996ea1d14d0aa9adf2d88e14)
+        ;
+
+        
+    
+    
+            var circle_marker_0ebde44f1d8f7dda5ca0c9a76899186f = L.circleMarker(
+                [24.7964355, 85.0079563],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_d2fd512f844397c9abc13fa53aa2eede = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_0dbba6036286c880efbc4e7c90986e36 = $(`<div id="html_0dbba6036286c880efbc4e7c90986e36" style="width: 100.0%; height: 100.0%;">                 <b>Gaya, Bihar</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>89.1/100</b><br>                 Total Crimes: <b>822</b><br>                 Year: 2022                 </div>`)[0];
+                popup_d2fd512f844397c9abc13fa53aa2eede.setContent(html_0dbba6036286c880efbc4e7c90986e36);
+            
+        
+
+        circle_marker_0ebde44f1d8f7dda5ca0c9a76899186f.bindPopup(popup_d2fd512f844397c9abc13fa53aa2eede)
+        ;
+
+        
+    
+    
+            var circle_marker_7a5115c42f8b993f6ab586f6731a7bf4 = L.circleMarker(
+                [25.6093239, 85.1235252],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_a0115ba70091813bc4301f6310896455 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_8703b153d1950a626da0c488fd171069 = $(`<div id="html_8703b153d1950a626da0c488fd171069" style="width: 100.0%; height: 100.0%;">                 <b>Patna, Bihar</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>88.8/100</b><br>                 Total Crimes: <b>1161</b><br>                 Year: 2022                 </div>`)[0];
+                popup_a0115ba70091813bc4301f6310896455.setContent(html_8703b153d1950a626da0c488fd171069);
+            
+        
+
+        circle_marker_7a5115c42f8b993f6ab586f6731a7bf4.bindPopup(popup_a0115ba70091813bc4301f6310896455)
+        ;
+
+        
+    
+    
+            var circle_marker_27c3c15c53b10b1d81834c3191cdb79f = L.circleMarker(
+                [24.7171578, 74.4718129],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_58eea3539beee6a7c089b18eb70e002f = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a1393cc163c8b9dd94f579910c48bda1 = $(`<div id="html_a1393cc163c8b9dd94f579910c48bda1" style="width: 100.0%; height: 100.0%;">                 <b>Chittorgarh, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>83.9/100</b><br>                 Total Crimes: <b>1058</b><br>                 Year: 2022                 </div>`)[0];
+                popup_58eea3539beee6a7c089b18eb70e002f.setContent(html_a1393cc163c8b9dd94f579910c48bda1);
+            
+        
+
+        circle_marker_27c3c15c53b10b1d81834c3191cdb79f.bindPopup(popup_58eea3539beee6a7c089b18eb70e002f)
+        ;
+
+        
+    
+    
+            var circle_marker_a49934a639c77e6f3ed7e5baef7d3a37 = L.circleMarker(
+                [27.9472329, 76.6676441],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_4d2fb6de7bd64aa234c26d3724f1d3a3 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c5fbeb64cbf7086e9b1afa3689a2ab67 = $(`<div id="html_c5fbeb64cbf7086e9b1afa3689a2ab67" style="width: 100.0%; height: 100.0%;">                 <b>Khairthal-Tijara, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>83.8/100</b><br>                 Total Crimes: <b>958</b><br>                 Year: 2022                 </div>`)[0];
+                popup_4d2fb6de7bd64aa234c26d3724f1d3a3.setContent(html_c5fbeb64cbf7086e9b1afa3689a2ab67);
+            
+        
+
+        circle_marker_a49934a639c77e6f3ed7e5baef7d3a37.bindPopup(popup_4d2fb6de7bd64aa234c26d3724f1d3a3)
+        ;
+
+        
+    
+    
+            var circle_marker_0d772918d442ce989defa9b7a344429a = L.circleMarker(
+                [28.0159286, 73.3171367],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_7e8ca1fce4d24defc236e9fd69757351 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_be30bd64c3ad5f7145901068b0e6320c = $(`<div id="html_be30bd64c3ad5f7145901068b0e6320c" style="width: 100.0%; height: 100.0%;">                 <b>Bikaner, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>83.8/100</b><br>                 Total Crimes: <b>1150</b><br>                 Year: 2022                 </div>`)[0];
+                popup_7e8ca1fce4d24defc236e9fd69757351.setContent(html_be30bd64c3ad5f7145901068b0e6320c);
+            
+        
+
+        circle_marker_0d772918d442ce989defa9b7a344429a.bindPopup(popup_7e8ca1fce4d24defc236e9fd69757351)
+        ;
+
+        
+    
+    
+            var circle_marker_b0867488930b38f9a6b1f85581704c53 = L.circleMarker(
+                [24.7560846, 81.3810574],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_39ce55e2ee7216d03e91e153938a8e07 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_34697504ca58c1c7028442a0389dacf8 = $(`<div id="html_34697504ca58c1c7028442a0389dacf8" style="width: 100.0%; height: 100.0%;">                 <b>Rewa, Madhya Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>83.5/100</b><br>                 Total Crimes: <b>1005</b><br>                 Year: 2022                 </div>`)[0];
+                popup_39ce55e2ee7216d03e91e153938a8e07.setContent(html_34697504ca58c1c7028442a0389dacf8);
+            
+        
+
+        circle_marker_b0867488930b38f9a6b1f85581704c53.bindPopup(popup_39ce55e2ee7216d03e91e153938a8e07)
+        ;
+
+        
+    
+    
+            var circle_marker_a0729253ddecc470e764954318624fe7 = L.circleMarker(
+                [29.9123514, 78.0087178],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_0d94bb15281faa6b2a58f80194f20aa4 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_2810376a31ab07e6c4b8911d119f4237 = $(`<div id="html_2810376a31ab07e6c4b8911d119f4237" style="width: 100.0%; height: 100.0%;">                 <b>Haridwar, Uttarakhand</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>83.4/100</b><br>                 Total Crimes: <b>888</b><br>                 Year: 2022                 </div>`)[0];
+                popup_0d94bb15281faa6b2a58f80194f20aa4.setContent(html_2810376a31ab07e6c4b8911d119f4237);
+            
+        
+
+        circle_marker_a0729253ddecc470e764954318624fe7.bindPopup(popup_0d94bb15281faa6b2a58f80194f20aa4)
+        ;
+
+        
+    
+    
+            var circle_marker_d9609a4f6d0c39006cd6e9a362a5da0e = L.circleMarker(
+                [28.7192546, 77.0652677],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_fa5bba0bbc28943f942a5a7f8b8ae2dd = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_be1d6a5512230f53829b4054abc5e633 = $(`<div id="html_be1d6a5512230f53829b4054abc5e633" style="width: 100.0%; height: 100.0%;">                 <b>North West, Delhi</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>83.3/100</b><br>                 Total Crimes: <b>1066</b><br>                 Year: 2022                 </div>`)[0];
+                popup_fa5bba0bbc28943f942a5a7f8b8ae2dd.setContent(html_be1d6a5512230f53829b4054abc5e633);
+            
+        
+
+        circle_marker_d9609a4f6d0c39006cd6e9a362a5da0e.bindPopup(popup_fa5bba0bbc28943f942a5a7f8b8ae2dd)
+        ;
+
+        
+    
+    
+            var circle_marker_ea001e0d94ae50ed7ce03f385254b3aa = L.circleMarker(
+                [26.2604732, 82.2380532],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_11a5c2e4feed12f3329964cb38e15934 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_e2a0c4f6a613de315647769f55f06c36 = $(`<div id="html_e2a0c4f6a613de315647769f55f06c36" style="width: 100.0%; height: 100.0%;">                 <b>Sultanpur, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>83.2/100</b><br>                 Total Crimes: <b>872</b><br>                 Year: 2022                 </div>`)[0];
+                popup_11a5c2e4feed12f3329964cb38e15934.setContent(html_e2a0c4f6a613de315647769f55f06c36);
+            
+        
+
+        circle_marker_ea001e0d94ae50ed7ce03f385254b3aa.bindPopup(popup_11a5c2e4feed12f3329964cb38e15934)
+        ;
+
+        
+    
+    
+            var circle_marker_b82e4868bdb675c75d61ae601e8d4903 = L.circleMarker(
+                [26.9154576, 75.8189817],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_7d3c7b401fbe19e82e1dfa3949adc678 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a5a864e889ba89cc0049119bb80e01b9 = $(`<div id="html_a5a864e889ba89cc0049119bb80e01b9" style="width: 100.0%; height: 100.0%;">                 <b>Jaipur, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>82.0/100</b><br>                 Total Crimes: <b>983</b><br>                 Year: 2022                 </div>`)[0];
+                popup_7d3c7b401fbe19e82e1dfa3949adc678.setContent(html_a5a864e889ba89cc0049119bb80e01b9);
+            
+        
+
+        circle_marker_b82e4868bdb675c75d61ae601e8d4903.bindPopup(popup_7d3c7b401fbe19e82e1dfa3949adc678)
+        ;
+
+        
+    
+    
+            var circle_marker_002a9155332fd467ad58fbcb73a8dad9 = L.circleMarker(
+                [28.7192546, 77.0652677],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_6d4ef229a9d3432be935c265ca309229 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_11cfd7ddedc5f105b63a4a6b7eab4907 = $(`<div id="html_11cfd7ddedc5f105b63a4a6b7eab4907" style="width: 100.0%; height: 100.0%;">                 <b>North West, Delhi</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>81.4/100</b><br>                 Total Crimes: <b>1003</b><br>                 Year: 2022                 </div>`)[0];
+                popup_6d4ef229a9d3432be935c265ca309229.setContent(html_11cfd7ddedc5f105b63a4a6b7eab4907);
+            
+        
+
+        circle_marker_002a9155332fd467ad58fbcb73a8dad9.bindPopup(popup_6d4ef229a9d3432be935c265ca309229)
+        ;
+
+        
+    
+    
+            var circle_marker_fc9b3503320061cd6ac0605ea3806e8b = L.circleMarker(
+                [16.2135466, 81.0277844],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_cda870d7a5c28aca0f342794d06cead3 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_289b8c9bfc64f54cd458d4f5283d0f72 = $(`<div id="html_289b8c9bfc64f54cd458d4f5283d0f72" style="width: 100.0%; height: 100.0%;">                 <b>Krishna, Andhra Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>81.3/100</b><br>                 Total Crimes: <b>1346</b><br>                 Year: 2022                 </div>`)[0];
+                popup_cda870d7a5c28aca0f342794d06cead3.setContent(html_289b8c9bfc64f54cd458d4f5283d0f72);
+            
+        
+
+        circle_marker_fc9b3503320061cd6ac0605ea3806e8b.bindPopup(popup_cda870d7a5c28aca0f342794d06cead3)
+        ;
+
+        
+    
+    
+            var circle_marker_b7f205a82f8f325b6bc2e53f7dd0a792 = L.circleMarker(
+                [24.0232221, 74.6250275],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_7b46a45dd11f51f706226f9719b0d39e = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_12ed9509d6f497804b7f5a6d1c539dc7 = $(`<div id="html_12ed9509d6f497804b7f5a6d1c539dc7" style="width: 100.0%; height: 100.0%;">                 <b>Pratapgarh, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>80.5/100</b><br>                 Total Crimes: <b>873</b><br>                 Year: 2022                 </div>`)[0];
+                popup_7b46a45dd11f51f706226f9719b0d39e.setContent(html_12ed9509d6f497804b7f5a6d1c539dc7);
+            
+        
+
+        circle_marker_b7f205a82f8f325b6bc2e53f7dd0a792.bindPopup(popup_7b46a45dd11f51f706226f9719b0d39e)
+        ;
+
+        
+    
+    
+            var circle_marker_548412ad3e6998c04be30babec50df90 = L.circleMarker(
+                [21.2380912, 81.6336993],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_53fdc71c4c7d982ac78048c62fc32027 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_41fb83dd7618254ba05752826af8ac7d = $(`<div id="html_41fb83dd7618254ba05752826af8ac7d" style="width: 100.0%; height: 100.0%;">                 <b>Raipur, Chhattisgarh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>79.5/100</b><br>                 Total Crimes: <b>955</b><br>                 Year: 2022                 </div>`)[0];
+                popup_53fdc71c4c7d982ac78048c62fc32027.setContent(html_41fb83dd7618254ba05752826af8ac7d);
+            
+        
+
+        circle_marker_548412ad3e6998c04be30babec50df90.bindPopup(popup_53fdc71c4c7d982ac78048c62fc32027)
+        ;
+
+        
+    
+    
+            var circle_marker_96f9c8979c5c6d8f8b4b03b22ac33c81 = L.circleMarker(
+                [27.4955539, 77.6855554],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_7e5b2d3d9ff669924a2a2f4b95868483 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_43a280808793e2cccb385cf0287f344a = $(`<div id="html_43a280808793e2cccb385cf0287f344a" style="width: 100.0%; height: 100.0%;">                 <b>Mathura, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>79.3/100</b><br>                 Total Crimes: <b>1078</b><br>                 Year: 2022                 </div>`)[0];
+                popup_7e5b2d3d9ff669924a2a2f4b95868483.setContent(html_43a280808793e2cccb385cf0287f344a);
+            
+        
+
+        circle_marker_96f9c8979c5c6d8f8b4b03b22ac33c81.bindPopup(popup_7e5b2d3d9ff669924a2a2f4b95868483)
+        ;
+
+        
+    
+    
+            var circle_marker_32688bbc7bd19942291358f01f07fbfa = L.circleMarker(
+                [20.8428827, 75.5261246],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_0e4ae490a385b73e3026fd385235d5ed = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_98ba32b341ec9dab7a862ee13bc9dd39 = $(`<div id="html_98ba32b341ec9dab7a862ee13bc9dd39" style="width: 100.0%; height: 100.0%;">                 <b>Jalgaon, Maharashtra</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>79.3/100</b><br>                 Total Crimes: <b>1260</b><br>                 Year: 2022                 </div>`)[0];
+                popup_0e4ae490a385b73e3026fd385235d5ed.setContent(html_98ba32b341ec9dab7a862ee13bc9dd39);
+            
+        
+
+        circle_marker_32688bbc7bd19942291358f01f07fbfa.bindPopup(popup_0e4ae490a385b73e3026fd385235d5ed)
+        ;
+
+        
+    
+    
+            var circle_marker_793e92ce18e6b2420c83bc805f88dde0 = L.circleMarker(
+                [23.8538893, 73.7087177],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_89534e03deb2932c879d9f99f46b447a = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_60ee51e83a2079262d24bffb91d8f785 = $(`<div id="html_60ee51e83a2079262d24bffb91d8f785" style="width: 100.0%; height: 100.0%;">                 <b>Dungarpur, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>78.2/100</b><br>                 Total Crimes: <b>616</b><br>                 Year: 2022                 </div>`)[0];
+                popup_89534e03deb2932c879d9f99f46b447a.setContent(html_60ee51e83a2079262d24bffb91d8f785);
+            
+        
+
+        circle_marker_793e92ce18e6b2420c83bc805f88dde0.bindPopup(popup_89534e03deb2932c879d9f99f46b447a)
+        ;
+
+        
+    
+    
+            var circle_marker_b23208f90950226e42f43d6d6eb27869 = L.circleMarker(
+                [17.9820644, 79.5970954],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_5272eb6f1c1d898c8a7cca8a26f1f399 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_b95a6f17bbd24b21bce7e10fdb05e4c5 = $(`<div id="html_b95a6f17bbd24b21bce7e10fdb05e4c5" style="width: 100.0%; height: 100.0%;">                 <b>Warangal, Telangana</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>78.1/100</b><br>                 Total Crimes: <b>1197</b><br>                 Year: 2022                 </div>`)[0];
+                popup_5272eb6f1c1d898c8a7cca8a26f1f399.setContent(html_b95a6f17bbd24b21bce7e10fdb05e4c5);
+            
+        
+
+        circle_marker_b23208f90950226e42f43d6d6eb27869.bindPopup(popup_5272eb6f1c1d898c8a7cca8a26f1f399)
+        ;
+
+        
+    
+    
+            var circle_marker_0bfe2c2b26f40a8ca82a5e536999fa06 = L.circleMarker(
+                [19.0592671, 72.861326],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_a457d4f0d94b83696c590f0486d6f2e7 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_92ceab22dcb7e3f132fc9b2b2924266f = $(`<div id="html_92ceab22dcb7e3f132fc9b2b2924266f" style="width: 100.0%; height: 100.0%;">                 <b>Mumbai Suburban, Maharashtra</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>78.0/100</b><br>                 Total Crimes: <b>979</b><br>                 Year: 2022                 </div>`)[0];
+                popup_a457d4f0d94b83696c590f0486d6f2e7.setContent(html_92ceab22dcb7e3f132fc9b2b2924266f);
+            
+        
+
+        circle_marker_0bfe2c2b26f40a8ca82a5e536999fa06.bindPopup(popup_a457d4f0d94b83696c590f0486d6f2e7)
+        ;
+
+        
+    
+    
+            var circle_marker_6b90828d690413e201fa357c1e34198b = L.circleMarker(
+                [23.4915047, 74.3502172],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_70f0bf9c77092c27633969e99554c3f9 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a01713e9d43122a9b93f105daa949095 = $(`<div id="html_a01713e9d43122a9b93f105daa949095" style="width: 100.0%; height: 100.0%;">                 <b>Banswara, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>77.8/100</b><br>                 Total Crimes: <b>700</b><br>                 Year: 2022                 </div>`)[0];
+                popup_70f0bf9c77092c27633969e99554c3f9.setContent(html_a01713e9d43122a9b93f105daa949095);
+            
+        
+
+        circle_marker_6b90828d690413e201fa357c1e34198b.bindPopup(popup_70f0bf9c77092c27633969e99554c3f9)
+        ;
+
+        
+    
+    
+            var circle_marker_09d02b75c09aa69544dccc96de08eb53 = L.circleMarker(
+                [20.8411255, 85.0804007],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_195dd63c46108fe9217e27b1a89898c6 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_3de8a850e521243dcf5e0ed2022bc421 = $(`<div id="html_3de8a850e521243dcf5e0ed2022bc421" style="width: 100.0%; height: 100.0%;">                 <b>Anugul, Odisha</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>77.0/100</b><br>                 Total Crimes: <b>1215</b><br>                 Year: 2022                 </div>`)[0];
+                popup_195dd63c46108fe9217e27b1a89898c6.setContent(html_3de8a850e521243dcf5e0ed2022bc421);
+            
+        
+
+        circle_marker_09d02b75c09aa69544dccc96de08eb53.bindPopup(popup_195dd63c46108fe9217e27b1a89898c6)
+        ;
+
+        
+    
+    
+            var circle_marker_9e031952d6859ef78e4553333dead9d0 = L.circleMarker(
+                [22.1638486, 82.1365923],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_b40ab2d40a98e83091ec5ef900860e86 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_dcdd21d06039e166133a35a6b31d6025 = $(`<div id="html_dcdd21d06039e166133a35a6b31d6025" style="width: 100.0%; height: 100.0%;">                 <b>Bilaspur, Chhattisgarh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>76.6/100</b><br>                 Total Crimes: <b>721</b><br>                 Year: 2022                 </div>`)[0];
+                popup_b40ab2d40a98e83091ec5ef900860e86.setContent(html_dcdd21d06039e166133a35a6b31d6025);
+            
+        
+
+        circle_marker_9e031952d6859ef78e4553333dead9d0.bindPopup(popup_b40ab2d40a98e83091ec5ef900860e86)
+        ;
+
+        
+    
+    
+            var circle_marker_636f53b389658d6325f1baeb1964bacb = L.circleMarker(
+                [29.3912753, 76.9771675],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_8e7b0c4dced666c6d2705a796a237c8a = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_1b63da8051f09f84762f64628ed8e667 = $(`<div id="html_1b63da8051f09f84762f64628ed8e667" style="width: 100.0%; height: 100.0%;">                 <b>Panipat, Haryana</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>76.6/100</b><br>                 Total Crimes: <b>909</b><br>                 Year: 2022                 </div>`)[0];
+                popup_8e7b0c4dced666c6d2705a796a237c8a.setContent(html_1b63da8051f09f84762f64628ed8e667);
+            
+        
+
+        circle_marker_636f53b389658d6325f1baeb1964bacb.bindPopup(popup_8e7b0c4dced666c6d2705a796a237c8a)
+        ;
+
+        
+    
+    
+            var circle_marker_23e3012fae718506fbe98c6ba2684162 = L.circleMarker(
+                [17.6935526, 83.2921297],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_70809d7a491ae6e3e9f2f74c7e924789 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_124824bd7690d127fe46f2ec2408ef83 = $(`<div id="html_124824bd7690d127fe46f2ec2408ef83" style="width: 100.0%; height: 100.0%;">                 <b>Visakhapatnam, Andhra Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>76.3/100</b><br>                 Total Crimes: <b>1240</b><br>                 Year: 2022                 </div>`)[0];
+                popup_70809d7a491ae6e3e9f2f74c7e924789.setContent(html_124824bd7690d127fe46f2ec2408ef83);
+            
+        
+
+        circle_marker_23e3012fae718506fbe98c6ba2684162.bindPopup(popup_70809d7a491ae6e3e9f2f74c7e924789)
+        ;
+
+        
+    
+    
+            var circle_marker_bc69bdbd24e598064cc14a39a215ee33 = L.circleMarker(
+                [26.25, 81.25],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_8760742ea8b64013610b6b60dc091292 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_561f6ccb8190b358a4ba481484e60fdd = $(`<div id="html_561f6ccb8190b358a4ba481484e60fdd" style="width: 100.0%; height: 100.0%;">                 <b>Rae Bareli, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>75.6/100</b><br>                 Total Crimes: <b>662</b><br>                 Year: 2022                 </div>`)[0];
+                popup_8760742ea8b64013610b6b60dc091292.setContent(html_561f6ccb8190b358a4ba481484e60fdd);
+            
+        
+
+        circle_marker_bc69bdbd24e598064cc14a39a215ee33.bindPopup(popup_8760742ea8b64013610b6b60dc091292)
+        ;
+
+        
+    
+    
+            var circle_marker_35effb53240554b0bebb1fb083eed6c9 = L.circleMarker(
+                [26.9986675, 79.6927946],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_238b6ed6f73d0c3a4664c86ce27fd39e = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a5c8e5e75b87a69ebed88b20a5d422af = $(`<div id="html_a5c8e5e75b87a69ebed88b20a5d422af" style="width: 100.0%; height: 100.0%;">                 <b>Kannauj, Uttar Pradesh</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>75.5/100</b><br>                 Total Crimes: <b>1000</b><br>                 Year: 2022                 </div>`)[0];
+                popup_238b6ed6f73d0c3a4664c86ce27fd39e.setContent(html_a5c8e5e75b87a69ebed88b20a5d422af);
+            
+        
+
+        circle_marker_35effb53240554b0bebb1fb083eed6c9.bindPopup(popup_238b6ed6f73d0c3a4664c86ce27fd39e)
+        ;
+
+        
+    
+    
+            var circle_marker_3418e36264472e04577d3962a4719d5f = L.circleMarker(
+                [20.0638677, 78.3565663],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_eb9d1d614ae18a13c5ca9ca05cbe557c = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_bab4d7ae51341312392cb7da553adffb = $(`<div id="html_bab4d7ae51341312392cb7da553adffb" style="width: 100.0%; height: 100.0%;">                 <b>Yavatmal, Maharashtra</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>75.0/100</b><br>                 Total Crimes: <b>1127</b><br>                 Year: 2022                 </div>`)[0];
+                popup_eb9d1d614ae18a13c5ca9ca05cbe557c.setContent(html_bab4d7ae51341312392cb7da553adffb);
+            
+        
+
+        circle_marker_3418e36264472e04577d3962a4719d5f.bindPopup(popup_eb9d1d614ae18a13c5ca9ca05cbe557c)
+        ;
+
+        
+    
+    
+            var circle_marker_6e8f6abdfff122c2e63f34f745172bbd = L.circleMarker(
+                [28.5936077, 77.0664075],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_1eac5d9b219056ecd224544b3650dd29 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_ef3c3fa68dd2139864dae9e5e5413e93 = $(`<div id="html_ef3c3fa68dd2139864dae9e5e5413e93" style="width: 100.0%; height: 100.0%;">                 <b>West, Delhi</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>74.4/100</b><br>                 Total Crimes: <b>917</b><br>                 Year: 2022                 </div>`)[0];
+                popup_1eac5d9b219056ecd224544b3650dd29.setContent(html_ef3c3fa68dd2139864dae9e5e5413e93);
+            
+        
+
+        circle_marker_6e8f6abdfff122c2e63f34f745172bbd.bindPopup(popup_1eac5d9b219056ecd224544b3650dd29)
+        ;
+
+        
+    
+    
+            var circle_marker_9275b467491b3f2dd51ddc40510c66f7 = L.circleMarker(
+                [26.9154576, 75.8189817],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_2f0204606d2a8320826e414b7bc41bdc = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_1ef91acb36180cbc132ecf7b70c10c5b = $(`<div id="html_1ef91acb36180cbc132ecf7b70c10c5b" style="width: 100.0%; height: 100.0%;">                 <b>Jaipur, Rajasthan</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>74.1/100</b><br>                 Total Crimes: <b>1002</b><br>                 Year: 2022                 </div>`)[0];
+                popup_2f0204606d2a8320826e414b7bc41bdc.setContent(html_1ef91acb36180cbc132ecf7b70c10c5b);
+            
+        
+
+        circle_marker_9275b467491b3f2dd51ddc40510c66f7.bindPopup(popup_2f0204606d2a8320826e414b7bc41bdc)
+        ;
+
+        
+    
+    
+            var circle_marker_9bd4caabc8b6d8d01ab827894499d7f5 = L.circleMarker(
+                [17.8499067, 75.2763203],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_a5a8dcf8973f93adc88cff6ef982432b);
+        
+    
+        var popup_7403eb94a5ccce8be3551adc7ac9f518 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_ed9f4c8783233afb3bf5882ffe18d8f2 = $(`<div id="html_ed9f4c8783233afb3bf5882ffe18d8f2" style="width: 100.0%; height: 100.0%;">                 <b>Solapur, Maharashtra</b><br>                 Risk Level: <b>Critical</b><br>                 Safety Score: <b>74.0/100</b><br>                 Total Crimes: <b>1104</b><br>                 Year: 2022                 </div>`)[0];
+                popup_7403eb94a5ccce8be3551adc7ac9f518.setContent(html_ed9f4c8783233afb3bf5882ffe18d8f2);
+            
+        
+
+        circle_marker_9bd4caabc8b6d8d01ab827894499d7f5.bindPopup(popup_7403eb94a5ccce8be3551adc7ac9f518)
+        ;
+
+        
+    
+</script>
+</html>
